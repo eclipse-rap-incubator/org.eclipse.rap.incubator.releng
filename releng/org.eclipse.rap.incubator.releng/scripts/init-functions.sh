@@ -11,14 +11,19 @@ p2AddContent() {
 
   SOURCE=file://${1}
   DESTINATION=file://${2}
+  DESTINATION_NAME=${3:-"A RAP p2 Repository"}
 
   ${ECLIPSE_HOME}/eclipse -nosplash -verbose \
     -application org.eclipse.equinox.p2.metadata.repository.mirrorApplication \
     -source ${SOURCE} \
-    -destination ${DESTINATION}
+    -destination ${DESTINATION} \
+    -destinationName ${DESTINATION_NAME}
   ${ECLIPSE_HOME}/eclipse -nosplash -verbose \
     -application org.eclipse.equinox.p2.artifact.repository.mirrorApplication \
     -source ${SOURCE} \
-    -destination ${DESTINATION}
+    -destination ${DESTINATION} \
+    -destinationName ${DESTINATION_NAME} \
+    -raw \
+    -compare
 }
 

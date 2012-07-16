@@ -95,18 +95,22 @@ cd ${COMPONENT_DIRECTORY}
 echo "Removing old repositories from ${COMPONENT_DIRECTORY}, keeping the ${NUM_TO_KEEP} most recent"
 while [ $(find . -maxdepth 1 -type d | grep '.*[0-9]$' | wc -l) -gt ${NUM_TO_KEEP} ]
 do
-  TO_DELETE=`ls -ldrt --time-style=long-iso *[0-9] | grep '^d' | head -1 | awk '{print $8}'`
+  TO_DELETE=`ls -ldtr --time-style=long-iso *[0-9] | grep '^d' | head -1 | awk '{print $8}'`
   echo "Deleting ${COMPONENT_DIRECTORY}/${TO_DELETE}"
   rm -rf $TO_DELETE
 done
 
 ######################################################################
 # create final p2 repository
-## TODO mknauer Replace this with a more sophisticated implementation as soon as we have constant qualifiers
 cd ${COMPONENT_DIRECTORY}
 echo "Creating p2 repository in ${COMPONENT_DIRECTORY}"
 rm -rf content.jar artifact.jar plugins/ features/
-for II in [0-9]*-[0-9]*; do
+for II in `ls -dtr [0-9]*-[0-9]*`; do
   echo "Adding data from ${II}"
-  p2AddContent ${COMPONENT_DIRECTORY}/${II} ${COMPONENT_DIRECTORY}
+  p2AddContent ${COMPONENT_DIRECTORY}/${II} ${COMPONENT_DIRECTORY} ${COMPONENT_NAME}
 done
+
+######################################################################
+# build done
+echo "Build ${VERSION} of ${COMPONENT_NAME} ${VERSION} done."
+

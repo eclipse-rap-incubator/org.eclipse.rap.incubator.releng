@@ -6,7 +6,7 @@ echo "Workspace location: ${WORKSPACE}"
 export MVN=${MVN:-"/opt/public/common/apache-maven-3.0.3/bin/mvn"}
 echo "Maven path: ${MVN}"
 
-export ECLIPSE_HOME=${ECLIPSE_HOME:-"/shared/rt/rap/build-runtimes/eclipse-3.6.2"}
+export ECLIPSE_HOME=${ECLIPSE_HOME:-"/shared/rt/rap/build-runtimes/eclipse"}
 echo "Eclipse location: ${ECLIPSE_HOME}"
 
 export SIGNING_LOCATION=${SIGNING_LOCATION:-"/opt/public/download-staging.priv/rt/rap"}
