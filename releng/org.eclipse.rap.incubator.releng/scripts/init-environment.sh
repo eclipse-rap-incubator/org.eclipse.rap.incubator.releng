@@ -1,5 +1,7 @@
 # This script sets up common environment variables for the RAP builds
 
+echo "***********************************************************************"
+
 export WORKSPACE=${WORKSPACE:-$PWD}
 echo "Workspace location: ${WORKSPACE}"
 

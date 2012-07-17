@@ -6,9 +6,9 @@
 
 ######################################################################
 # initial argument checks
-if [ $# -lt 2 ]
+if [ $# -lt 1 ]
 then
-  echo "Usage: `basename $0` GIT_REPOSITORY_NAME RELENG_PROEJCT_PATH [M|S]"
+  echo "Usage: `basename $0` COMPONENT_NAME [M|S]"
   exit 1
 fi
 export BUILD_TYPE=${3:-"M"}
@@ -17,13 +17,13 @@ export BUILD_TYPE=${3:-"M"}
 # setup and initialization
 
 SCRIPTS_DIR=$(dirname $(readlink -nm $0))
-test -f ${SCRIPTS_DIR}/init-environment.sh && . ${SCRIPTS_DIR}/init-environment.sh
-test -f ${SCRIPTS_DIR}/init-functions.sh   && . ${SCRIPTS_DIR}/init-functions.sh
+test -f ${SCRIPTS_DIR}/init-functions.sh && . ${SCRIPTS_DIR}/init-functions.sh
 
-REPOSITORY_NAME=${1}
-BUILD_PROJECT_PATH=${2}
+COMPONENT_NAME=${1}
+REPOSITORY_NAME="org.eclipse.rap.incubator.${COMPONENT_NAME}"
+BUILD_PROJECT_PATH="releng/org.eclipse.rap.${COMPONENT_NAME}.build"
 
-if [ "${BUILD_TYPE}" == "S" ]; then
+if [ "S" == "${BUILD_TYPE}" ]; then
   SIGN=true
 else
   SIGN=false
@@ -35,7 +35,10 @@ test -d ${WORKSPACE} || exit 1
 
 ######################################################################
 # configuration check and debug
-echo "Git repository name: ${REPOSITORY_NAME}"
+echo "***********************************************************************"
+echo "Running `basename $0`"
+echo "RAP component name: ${COMPONENT_NAME}"
+echo "Repository name: ${REPOSITORY_NAME}"
 echo "Build project path: ${BUILD_PROJECT_PATH}"
 echo "Build type: ${BUILD_TYPE}"
 echo "Signing enabled: ${SIGN}"
@@ -82,28 +85,27 @@ test -n "${TIMESTAMP}" || exit 1
 
 ######################################################################
 # copy repository to target location
-COMPONENT_NAME=$(echo ${REPOSITORY_NAME} | sed 's/.*\.incubator\.\(.*\)/\1/')
-test -n "${COMPONENT_NAME}" || exit 1
 COMPONENT_DIRECTORY=${REPOSITORY_BASE_PATH}/${COMPONENT_NAME}
 echo "Copy new ${TIMESTAMP} repository of ${COMPONENT_NAME} to ${COMPONENT_DIRECTORY}" 
 mkdir -p ${COMPONENT_DIRECTORY}
+cd ${COMPONENT_DIRECTORY}
 cp -a ${REPOSITORY_DIRECTORY} ${COMPONENT_DIRECTORY}/${TIMESTAMP}
 
 ######################################################################
 # clean-up target location
-cd ${COMPONENT_DIRECTORY}
 echo "Removing old repositories from ${COMPONENT_DIRECTORY}, keeping the ${NUM_TO_KEEP} most recent"
+cd ${COMPONENT_DIRECTORY}
 while [ $(find . -maxdepth 1 -type d | grep '.*[0-9]$' | wc -l) -gt ${NUM_TO_KEEP} ]
 do
   TO_DELETE=`ls -ldtr --time-style=long-iso *[0-9] | grep '^d' | head -1 | awk '{print $8}'`
   echo "Deleting ${COMPONENT_DIRECTORY}/${TO_DELETE}"
-  rm -rf $TO_DELETE
+  rm -rf ${TO_DELETE}
 done
 
 ######################################################################
 # create final p2 repository
-cd ${COMPONENT_DIRECTORY}
 echo "Creating p2 repository in ${COMPONENT_DIRECTORY}"
+cd ${COMPONENT_DIRECTORY}
 rm -rf content.jar artifact.jar plugins/ features/
 for II in `ls -dtr [0-9]*-[0-9]*`; do
   echo "Adding data from ${II}"
@@ -112,5 +114,6 @@ done
 
 ######################################################################
 # build done
-echo "Build ${VERSION} of ${COMPONENT_NAME} ${VERSION} done."
+echo "Build ${TIMESTAMP} of ${COMPONENT_NAME} ${VERSION} done."
+echo "***********************************************************************"
 

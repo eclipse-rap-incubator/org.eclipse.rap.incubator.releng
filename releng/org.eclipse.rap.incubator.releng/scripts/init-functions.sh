@@ -2,10 +2,12 @@
 
 test -f ${SCRIPTS_DIR}/init-environment.sh && . ${SCRIPTS_DIR}/init-environment.sh
 
+echo "***********************************************************************"
+
 p2AddContent() {
   if [ $# -lt 2 ]
   then
-    echo "Usage: `p2AddContent` SOURCE_REPO TARGET_REPO"
+    echo "Usage: `p2AddContent` SOURCE_REPO TARGET_REPO [NAME]"
     exit 1
   fi
 
