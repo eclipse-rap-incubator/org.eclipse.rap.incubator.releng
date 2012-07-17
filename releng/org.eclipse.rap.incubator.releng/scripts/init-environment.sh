@@ -21,7 +21,7 @@ echo "Git incubator base URL: ${GIT_INCUBATOR_BASE}"
 export GIT_BRANCH=${GIT_BRANCH:-"master"}
 echo "Git branch: ${GIT_BRANCH}"
 
-export REPOSITORY_BASE_PATH=${REPOSITORY_BASE_PATH:-"/shared/rt/rap/nightly/2.0/incubator"}
+export REPOSITORY_BASE_PATH=${REPOSITORY_BASE_PATH:-"/shared/rt/rap/incubator/nightly"}
 echo "p2 repository base path: ${REPOSITORY_BASE_PATH}"
 
 export NUM_TO_KEEP=${NUM_TO_KEEP:-"5"}
