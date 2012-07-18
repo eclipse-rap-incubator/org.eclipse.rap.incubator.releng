@@ -21,6 +21,7 @@
 
   <properties>
     <tycho-version>0.15.0</tycho-version>
+    <signing-plugin-version>1.0.5</signing-plugin-version>
     <surefire-version>2.9</surefire-version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
@@ -41,6 +42,13 @@
       <url>http://build.eclipse.org/rt/rap/base-platforms/1.5/extra-dependencies</url>
     </repository>
   </repositories>
+
+  <pluginRepositories>
+    <pluginRepository>
+      <id>maven.eclipse.org</id>
+      <url>http://maven.eclipse.org/nexus/content/repositories/milestone-indigo</url>
+    </pluginRepository>
+  </pluginRepositories>
 
   <build>
     <plugins>
@@ -73,6 +81,15 @@
             </goals>
           </execution>
         </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.eclipse.dash.maven</groupId>
+        <artifactId>eclipse-signing-maven-plugin</artifactId>
+        <version>${signing-plugin-version}</version>
+        <configuration>
+          <signerInputDirectory>/home/data/httpd/download-staging.priv/rt/rap</signerInputDirectory>
+        </configuration>
       </plugin>
 
       <plugin>

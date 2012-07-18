@@ -11,7 +11,7 @@ then
   echo "Usage: `basename $0` COMPONENT_NAME [M|S]"
   exit 1
 fi
-export BUILD_TYPE=${3:-"M"}
+BUILD_TYPE=${2:-"M"}
 
 ######################################################################
 # setup and initialization
@@ -23,7 +23,8 @@ COMPONENT_NAME=${1}
 REPOSITORY_NAME="org.eclipse.rap.incubator.${COMPONENT_NAME}"
 BUILD_PROJECT_PATH="releng/org.eclipse.rap.${COMPONENT_NAME}.build"
 
-if [ "S" == "${BUILD_TYPE}" ]; then
+if [ X"$BUILD_TYPE" = XS ]
+then
   SIGN=true
 else
   SIGN=false
