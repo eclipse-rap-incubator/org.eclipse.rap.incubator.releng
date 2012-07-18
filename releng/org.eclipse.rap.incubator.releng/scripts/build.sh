@@ -85,9 +85,14 @@ test -n "${VERSION}" || exit 1
 test -n "${TIMESTAMP}" || exit 1
 
 ######################################################################
-# copy repository to target location
+# copy repository to target location if new version available
 COMPONENT_DIRECTORY=${REPOSITORY_BASE_PATH}/${COMPONENT_NAME}
 echo "Copy new ${TIMESTAMP} repository of ${COMPONENT_NAME} to ${COMPONENT_DIRECTORY}" 
+if [ -d "${COMPONENT_DIRECTORY}" ] ; then
+  echo "Build already exists in ${COMPONENT_DIRECTORY}. Nothing to do."
+  echo "Stopping build ${TIMESTAMP} of ${COMPONENT_NAME} ${VERSION}."
+  exit 0
+fi
 mkdir -p ${COMPONENT_DIRECTORY}
 cd ${COMPONENT_DIRECTORY}
 cp -a ${REPOSITORY_DIRECTORY} ${COMPONENT_DIRECTORY}/${TIMESTAMP}

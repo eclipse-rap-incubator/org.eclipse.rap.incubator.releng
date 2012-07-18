@@ -24,8 +24,6 @@ p2AddContent() {
     -application org.eclipse.equinox.p2.artifact.repository.mirrorApplication \
     -source ${SOURCE} \
     -destination ${DESTINATION} \
-    -destinationName ${DESTINATION_NAME} \
-    -raw \
-    -compare
+    -destinationName ${DESTINATION_NAME}
 }
 
