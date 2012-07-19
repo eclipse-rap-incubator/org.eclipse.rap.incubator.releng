@@ -40,12 +40,12 @@ echo "Local Maven repository location: ${MAVEN_LOCAL_REPO_PATH}"
 p2AddContent() {
   if [ $# -lt 3 ]
   then
-    echo "Usage: `p2AddContent` SOURCE_REPO TARGET_REPO REPO_NAME"
+    echo "Usage: `p2AddContent` SOURCE_REPO_URL TARGET_REPO_URL REPO_NAME"
     exit 1
   fi
 
-  SOURCE=file://${1}
-  DESTINATION=file://${2}
+  SOURCE="${1}"
+  DESTINATION="${2}"
   DESTINATION_NAME="${3}"
 
   ${ECLIPSE_HOME}/eclipse -nosplash -verbose \

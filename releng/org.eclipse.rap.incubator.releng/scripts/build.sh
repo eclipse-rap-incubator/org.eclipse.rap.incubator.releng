@@ -28,11 +28,10 @@ COMPONENT_NAME=${1}
 REPOSITORY_NAME="org.eclipse.rap.incubator.${COMPONENT_NAME}"
 BUILD_PROJECT_PATH="releng/org.eclipse.rap.${COMPONENT_NAME}.build"
 
+SIGN=false
 if [ X"$BUILD_TYPE" = XS ]
 then
   SIGN=true
-else
-  SIGN=false
 fi
 
 ######################################################################
@@ -72,7 +71,7 @@ git clone --branch=${GIT_BRANCH} ${REPOSITORY} ${REPOSITORY_NAME}
 BUILD_DIRECTORY=${WORKSPACE}/${REPOSITORY_NAME}/${BUILD_PROJECT_PATH}
 echo "Starting build in ${BUILD_DIRECTORY}"
 cd ${BUILD_DIRECTORY}
-${MVN} -e clean package -Dsign=${sign} -Dmaven.repo.local=${MAVEN_LOCAL_REPO_PATH}
+${MVN} -e clean package -Dsign=${SIGN} -Dmaven.repo.local=${MAVEN_LOCAL_REPO_PATH}
 EXITCODE=$?
 if [ "$EXITCODE" != "0" ]; then
   echo "Maven exited with error code " + ${EXITCODE}
@@ -94,7 +93,7 @@ test -n "${TIMESTAMP}" || exit 1
 # copy repository to target location if new version available
 COMPONENT_DIRECTORY=${REPOSITORY_BASE_PATH}/${COMPONENT_NAME}
 echo "Copy new ${TIMESTAMP} repository of ${COMPONENT_NAME} to ${COMPONENT_DIRECTORY}" 
-if [ -d "${COMPONENT_DIRECTORY}" ] ; then
+if [ -d "${COMPONENT_DIRECTORY}/${TIMESTAMP}" ] ; then
   echo "Build already exists in ${COMPONENT_DIRECTORY}. Nothing to do."
   echo "Stopping build ${TIMESTAMP} of ${COMPONENT_NAME} ${VERSION}."
   exit 0
@@ -114,7 +113,7 @@ for DIR in `ls -r ${COMPONENT_DIRECTORY} | grep '.*[0-9]$'`; do
       echo "Removing outdated repository ${DIR}"
       rm -r ${COMPONENT_DIRECTORY}/${DIR} || exit 1
     fi
-    let II=II+1;
+    let II=II+1
   fi
 done
 
@@ -122,9 +121,9 @@ done
 # create final p2 repository
 echo "Creating p2 repository in ${COMPONENT_DIRECTORY}"
 cd ${COMPONENT_DIRECTORY}
-rm -rf content.jar artifact.jar plugins/ features/
+rm -r content.jar artifacts.jar plugins/ features/
 for II in `ls -dtr [0-9]*-[0-9]*`; do
-  echo "Adding data from ${II}"
+  echo "Adding data from ${II} to ${COMPONENT_DIRECTORY}"
   p2AddContent ${COMPONENT_DIRECTORY}/${II} ${COMPONENT_DIRECTORY} ${COMPONENT_NAME}
 done
 
