@@ -8,16 +8,21 @@
 # initial argument checks
 if [ $# -lt 1 ]
 then
-  echo "Usage: `basename $0` COMPONENT_NAME [M|S]"
+  echo "Usage: `basename $0` COMPONENT_NAME [N|S]"
   exit 1
 fi
-BUILD_TYPE=${2:-"M"}
+BUILD_TYPE=${2:-"N"}
 
 ######################################################################
 # setup and initialization
-
 SCRIPTS_DIR=$(dirname $(readlink -nm $0))
-test -f ${SCRIPTS_DIR}/init-functions.sh && . ${SCRIPTS_DIR}/init-functions.sh
+if [ -e "${SCRIPTS_DIR}/init-environment.sh" ]
+then
+  . ${SCRIPTS_DIR}/init-environment.sh
+else
+  echo "init-environment.sh script not found at ${SCRIPTS_DIR}"
+  exit 1
+fi
 
 COMPONENT_NAME=${1}
 REPOSITORY_NAME="org.eclipse.rap.incubator.${COMPONENT_NAME}"
@@ -31,8 +36,9 @@ else
 fi
 
 ######################################################################
-# arbitrary checks and clean-ups
-test -d ${WORKSPACE} || exit 1
+# arbitrary checks
+# TODO mknauer - check if variable is set
+test -d "${WORKSPACE}" || exit 1
 
 ######################################################################
 # configuration check and debug
@@ -66,7 +72,7 @@ git clone --branch=${GIT_BRANCH} ${REPOSITORY} ${REPOSITORY_NAME}
 BUILD_DIRECTORY=${WORKSPACE}/${REPOSITORY_NAME}/${BUILD_PROJECT_PATH}
 echo "Starting build in ${BUILD_DIRECTORY}"
 cd ${BUILD_DIRECTORY}
-${MVN} -e clean package -Dsign=$sign
+${MVN} -e clean package -Dsign=${sign} -Dmaven.repo.local=${MAVEN_LOCAL_REPO_PATH}
 EXITCODE=$?
 if [ "$EXITCODE" != "0" ]; then
   echo "Maven exited with error code " + ${EXITCODE}
@@ -101,11 +107,15 @@ cp -a ${REPOSITORY_DIRECTORY} ${COMPONENT_DIRECTORY}/${TIMESTAMP}
 # clean-up target location
 echo "Removing old repositories from ${COMPONENT_DIRECTORY}, keeping the ${NUM_TO_KEEP} most recent"
 cd ${COMPONENT_DIRECTORY}
-while [ $(find . -maxdepth 1 -type d | grep '.*[0-9]$' | wc -l) -gt ${NUM_TO_KEEP} ]
-do
-  TO_DELETE=`ls -ldtr --time-style=long-iso *[0-9] | grep '^d' | head -1 | awk '{print $8}'`
-  echo "Deleting ${COMPONENT_DIRECTORY}/${TO_DELETE}"
-  rm -rf ${TO_DELETE}
+II=0
+for DIR in `ls -r ${COMPONENT_DIRECTORY} | grep '.*[0-9]$'`; do
+  if [ -d ${COMPONENT_DIRECTORY}/${DIR} ]; then
+    if [ $II -ge $NUM_TO_KEEP ]; then
+      echo "Removing outdated repository ${DIR}"
+      rm -r ${COMPONENT_DIRECTORY}/${DIR} || exit 1
+    fi
+    let II=II+1;
+  fi
 done
 
 ######################################################################
