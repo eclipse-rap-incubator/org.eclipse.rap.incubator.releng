@@ -100,7 +100,7 @@ if [ -d "${COMPONENT_DIRECTORY}/${TIMESTAMP}" ] ; then
 fi
 mkdir -p ${COMPONENT_DIRECTORY}
 cd ${COMPONENT_DIRECTORY}
-cp -a ${REPOSITORY_DIRECTORY} ${COMPONENT_DIRECTORY}/${TIMESTAMP}
+cp -r ${REPOSITORY_DIRECTORY} ${COMPONENT_DIRECTORY}/${TIMESTAMP}
 
 ######################################################################
 # clean-up target location
