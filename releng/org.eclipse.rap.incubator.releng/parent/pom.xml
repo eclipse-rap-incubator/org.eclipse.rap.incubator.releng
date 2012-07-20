@@ -25,6 +25,7 @@
     <signing-plugin-version>1.0.5</signing-plugin-version>
     <surefire-version>2.9</surefire-version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <baseline.repository>http://build.eclipse.org/rt/rap/incubator/nightly/</baseline.repository>
   </properties>
 
   <prerequisites>
@@ -41,6 +42,11 @@
       <id>extra-dependencies-repository</id>
       <layout>p2</layout>
       <url>http://build.eclipse.org/rt/rap/base-platforms/1.5/extra-dependencies</url>
+    </repository>
+    <repository>
+      <id>orbit-dependencies-repository</id>
+      <layout>p2</layout>
+      <url>http://download.eclipse.org/tools/orbit/downloads/drops/R20120526062928/repository</url>
     </repository>
   </repositories>
 
@@ -107,7 +113,7 @@
         <configuration>
           <baselineRepositories>
             <repository>
-              <url>http://build.eclipse.org/rt/rap/incubator/nightly/</url>
+              <url>${baseline.repository}</url>
             </repository>
           </baselineRepositories>
         </configuration>
