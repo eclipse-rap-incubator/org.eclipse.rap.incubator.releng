@@ -48,6 +48,11 @@
       <layout>p2</layout>
       <url>http://download.eclipse.org/tools/orbit/downloads/drops/R20120526062928/repository</url>
     </repository>
+    <repository>
+      <id>fileupload-dependencies-repository</id>
+      <layout>p2</layout>
+      <url>http://build.eclipse.org/rt/rap/incubator/nightly/fileupload/</url>
+    </repository>
   </repositories>
 
   <pluginRepositories>
