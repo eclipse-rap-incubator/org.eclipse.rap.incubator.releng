@@ -20,8 +20,8 @@
   <packaging>pom</packaging>
 
   <properties>
-    <tycho-version>0.16.0-SNAPSHOT</tycho-version>
-    <tycho-extras-version>0.16.0-SNAPSHOT</tycho-extras-version>
+    <tycho-version>0.16.0</tycho-version>
+    <tycho-extras-version>0.16.0</tycho-extras-version>
     <signing-plugin-version>1.0.5</signing-plugin-version>
     <surefire-version>2.9</surefire-version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
