@@ -82,8 +82,8 @@ fi
 # extract build timestamp
 ## TODO mknauer Find a better way to determine the TIMESTAMP
 REPOSITORY_DIRECTORY=${WORKSPACE}/${REPOSITORY_NAME}/${BUILD_PROJECT_PATH}/repository/target/repository
-VERSION=$(ls ${REPOSITORY_DIRECTORY}/features/org.eclipse.rap.*.feature_*.jar | sed 's/.*_\([0-9.-]\+\)\..*\.jar/\1/')
-TIMESTAMP=$(ls ${REPOSITORY_DIRECTORY}/features/org.eclipse.rap.*.feature_*.jar | sed 's/.*\.\([0-9-]\+\)\.jar/\1/')
+VERSION=$(ls ${REPOSITORY_DIRECTORY}/features/org.eclipse.rap.*.feature_*.jar | sed 's/.*_\([0-9.-]\+\)\..*\.jar/\1/' | head -1)
+TIMESTAMP=$(ls ${REPOSITORY_DIRECTORY}/features/org.eclipse.rap.*.feature_*.jar | sed 's/.*\.\([0-9-]\+\)\.jar/\1/' | head -1)
 echo "Version is ${VERSION}"
 echo "Timestamp is ${TIMESTAMP}"
 test -n "${VERSION}" || exit 1
