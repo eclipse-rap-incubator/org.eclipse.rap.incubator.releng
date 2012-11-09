@@ -50,6 +50,13 @@ echo "Build type: ${BUILD_TYPE}"
 echo "Signing enabled: ${SIGN}"
 
 ######################################################################
+# clean up local Maven repository to circumvent p2 cache problems
+for II in ".cache .meta p2" ; do
+  echo "Remove directory ${MAVEN_LOCAL_REPO_PATH}/${II}" 
+  rm -r ${MAVEN_LOCAL_REPO_PATH}/${II}
+done
+
+######################################################################
 # git clone build repository
 RELENG_REPOSITORY_NAME="org.eclipse.rap.incubator.releng"
 REPOSITORY=${GIT_INCUBATOR_BASE}/${RELENG_REPOSITORY_NAME}
