@@ -51,7 +51,7 @@ echo "Signing enabled: ${SIGN}"
 
 ######################################################################
 # clean up local Maven repository to circumvent p2 cache problems
-for II in ".cache .meta p2" ; do
+for II in .cache .meta p2 ; do
   echo "Remove directory ${MAVEN_LOCAL_REPO_PATH}/${II}" 
   rm -r ${MAVEN_LOCAL_REPO_PATH}/${II}
 done
