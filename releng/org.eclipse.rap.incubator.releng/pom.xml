@@ -27,7 +27,6 @@
 
   <properties>
     <tycho-version>0.13.0</tycho-version>
-    <surefire-version>2.9</surefire-version>
     <junit-version>3.8.2</junit-version>
     <mockito-version>1.8.4</mockito-version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -114,27 +113,17 @@
       </plugin>
 
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-surefire-plugin</artifactId>
-        <version>${surefire-version}</version>
-        <executions>
-          <execution>
-            <id>test</id>
-            <phase>test</phase>
-            <configuration>
-              <testClassesDirectory>${project.build.outputDirectory}</testClassesDirectory>
-              <includes>
-                <include>**/*_Test.java</include>
-              </includes>
-              <runOrder>random</runOrder>
-            </configuration>
-            <goals>
-              <goal>test</goal>
-            </goals>
-          </execution>
-        </executions>
+        <groupId>org.eclipse.tycho</groupId>
+        <artifactId>tycho-surefire-plugin</artifactId>
+        <version>${tycho-version}</version>
+        <configuration>
+          <includes>
+            <include>**/*_Test.java</include>
+          </includes>
+          <runOrder>random</runOrder>
+          <useUIHarness>false</useUIHarness>
+        </configuration>
       </plugin>
-
     </plugins>
   </build>
 
