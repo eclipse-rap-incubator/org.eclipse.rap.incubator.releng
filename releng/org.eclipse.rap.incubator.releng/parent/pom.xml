@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  Copyright (C) 2012 EclipseSource and others.
+  Copyright (C) 2012, 2013 EclipseSource and others.
   All rights reserved. This program and the accompanying materials
   are made available under the terms of the Eclipse Public License v1.0
   which accompanies this distribution, and is available at
@@ -24,6 +24,8 @@
     <tycho-extras-version>0.16.0</tycho-extras-version>
     <signing-plugin-version>1.0.5</signing-plugin-version>
     <surefire-version>2.9</surefire-version>
+    <junit-version>4.8.2</junit-version>
+    <mockito-version>1.9.5</mockito-version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <baseline.repository>http://build.eclipse.org/rt/rap/incubator/nightly/</baseline.repository>
   </properties>
@@ -157,5 +159,20 @@
 
     </plugins>
   </build>
+
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>${junit-version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-core</artifactId>
+      <version>${mockito-version}</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
 
 </project>
