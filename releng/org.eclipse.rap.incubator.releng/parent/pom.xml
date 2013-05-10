@@ -55,6 +55,11 @@
       <layout>p2</layout>
       <url>http://build.eclipse.org/rt/rap/incubator/nightly/fileupload/</url>
     </repository>
+    <repository>
+      <id>clientscripting-dependencies-repository</id>
+      <layout>p2</layout>
+      <url>http://build.eclipse.org/rt/rap/incubator/nightly/clientscripting/</url>
+    </repository>
   </repositories>
 
   <pluginRepositories>
