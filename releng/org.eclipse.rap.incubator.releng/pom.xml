@@ -68,7 +68,7 @@
     <repository>
       <id>orbit-repository</id>
       <layout>p2</layout>
-      <url>http://download.eclipse.org/tools/orbit/downloads/drops/S20120123151124/repository</url>
+      <url>http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository</url>
     </repository>
     <repository>
       <id>extra-dependencies-repository</id>
