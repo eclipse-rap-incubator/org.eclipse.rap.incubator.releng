@@ -27,7 +27,9 @@
     <junit-version>4.8.2</junit-version>
     <mockito-version>1.9.5</mockito-version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <baseline.repository>http://build.eclipse.org/rt/rap/incubator/nightly/</baseline.repository>
+    <rap-repository>http://download.eclipse.org/rt/rap/nightly/runtime/</rap-repository>
+    <rap-incubator-repository>http://download.eclipse.org/rt/rap/incubator/nightly/</rap-incubator-repository>
+    <baseline.repository>${rap-incubator-repository}</baseline.repository>
   </properties>
 
   <prerequisites>
@@ -36,9 +38,9 @@
 
   <repositories>
     <repository>
-      <id>base-platform-repository</id>
+      <id>rap-repository</id>
       <layout>p2</layout>
-      <url>http://download.eclipse.org/rt/rap/nightly/runtime</url>
+      <url>${rap-repository}</url>
     </repository>
     <repository>
       <id>extra-dependencies-repository</id>
