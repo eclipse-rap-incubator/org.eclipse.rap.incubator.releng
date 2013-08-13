@@ -24,6 +24,9 @@ echo "Git incubator base URL: ${GIT_INCUBATOR_BASE}"
 export GIT_BRANCH=${GIT_BRANCH:-"master"}
 echo "Git branch: ${GIT_BRANCH}"
 
+export RAP_REPOSITORY=${RAP_REPOSITORY:-"http://download.eclipse.org/rt/rap/incubator/nightly/"}
+echo "RAP Runtime p2 repository: ${RAP_REPOSITORY}"
+
 export REPOSITORY_BASE_PATH=${REPOSITORY_BASE_PATH:-"/shared/rt/rap/incubator/nightly"}
 echo "p2 repository base path: ${REPOSITORY_BASE_PATH}"
 

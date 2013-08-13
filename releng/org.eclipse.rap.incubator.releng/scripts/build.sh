@@ -48,6 +48,7 @@ echo "Repository name: ${REPOSITORY_NAME}"
 echo "Build project path: ${BUILD_PROJECT_PATH}"
 echo "Build type: ${BUILD_TYPE}"
 echo "Signing enabled: ${SIGN}"
+echo "RAP Runtime library: ${RAP_REPOSITORY}"
 
 ######################################################################
 # clean up local Maven repository to circumvent p2 cache problems
@@ -78,7 +79,7 @@ git clone --branch=${GIT_BRANCH} ${REPOSITORY} ${REPOSITORY_NAME}
 BUILD_DIRECTORY=${WORKSPACE}/${REPOSITORY_NAME}/${BUILD_PROJECT_PATH}
 echo "Starting build in ${BUILD_DIRECTORY}"
 cd ${BUILD_DIRECTORY}
-${MVN} -e clean package -Dsign=${SIGN} -Dmaven.repo.local=${MAVEN_LOCAL_REPO_PATH}
+${MVN} -e clean package -Dsign=${SIGN} -Dmaven.repo.local=${MAVEN_LOCAL_REPO_PATH} -Drap-repository=${RAP_REPOSITORY}
 EXITCODE=$?
 if [ "$EXITCODE" != "0" ]; then
   echo "Maven exited with error code " + ${EXITCODE}
