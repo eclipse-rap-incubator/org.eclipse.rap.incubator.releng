@@ -28,10 +28,10 @@ COMPONENT_NAME=${1}
 REPOSITORY_NAME="org.eclipse.rap.incubator.${COMPONENT_NAME}"
 BUILD_PROJECT_PATH="releng/org.eclipse.rap.${COMPONENT_NAME}.build"
 
-SIGN=false
+SIGNPROFILE=""
 if [ X"$BUILD_TYPE" = XS ]
 then
-  SIGN=true
+  SIGNPROFILE="-Peclipse-sign"
 fi
 
 ######################################################################
@@ -47,7 +47,7 @@ echo "RAP component name: ${COMPONENT_NAME}"
 echo "Repository name: ${REPOSITORY_NAME}"
 echo "Build project path: ${BUILD_PROJECT_PATH}"
 echo "Build type: ${BUILD_TYPE}"
-echo "Signing enabled: ${SIGN}"
+echo "Sign Profile: ${SIGNPROFILE}"
 echo "RAP Runtime library: ${RAP_REPOSITORY}"
 
 ######################################################################
@@ -79,7 +79,7 @@ git clone --branch=${GIT_BRANCH} ${REPOSITORY} ${REPOSITORY_NAME}
 BUILD_DIRECTORY=${WORKSPACE}/${REPOSITORY_NAME}/${BUILD_PROJECT_PATH}
 echo "Starting build in ${BUILD_DIRECTORY}"
 cd ${BUILD_DIRECTORY}
-${MVN} -e clean package -Dsign=${SIGN} -Dmaven.repo.local=${MAVEN_LOCAL_REPO_PATH} -Drap-repository=${RAP_REPOSITORY}
+${MVN} -e clean package $SIGNPROFILE -Dmaven.repo.local=${MAVEN_LOCAL_REPO_PATH} -Drap-repository=${RAP_REPOSITORY}
 EXITCODE=$?
 if [ "$EXITCODE" != "0" ]; then
   echo "Maven exited with error code " + ${EXITCODE}
