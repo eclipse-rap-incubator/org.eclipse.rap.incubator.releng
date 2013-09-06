@@ -64,7 +64,7 @@ REPOSITORY=${GIT_INCUBATOR_BASE}/${RELENG_REPOSITORY_NAME}
 echo "Git clone of releng repository ${REPOSITORY} into ${WORKSPACE}"
 cd ${WORKSPACE}
 rm -rf ${WORKSPACE}/${RELENG_REPOSITORY_NAME:-"DUMMYDIRECTORY"}
-git clone --branch=${GIT_BRANCH} ${REPOSITORY} ${RELENG_REPOSITORY_NAME}
+git clone --branch=${RELENG_GIT_BRANCH} ${REPOSITORY} ${RELENG_REPOSITORY_NAME}
 
 ######################################################################
 # git clone

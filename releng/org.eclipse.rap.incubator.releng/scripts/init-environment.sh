@@ -24,6 +24,9 @@ echo "Git incubator base URL: ${GIT_INCUBATOR_BASE}"
 export GIT_BRANCH=${GIT_BRANCH:-"master"}
 echo "Git branch: ${GIT_BRANCH}"
 
+export RELENG_GIT_BRANCH=${RELENG_GIT_BRANCH:-"master"}
+echo "Releng Git branch: ${RELENG_GIT_BRANCH}"
+
 export RAP_REPOSITORY=${RAP_REPOSITORY:-"http://download.eclipse.org/rt/rap/nightly/runtime/"}
 echo "RAP Runtime p2 repository: ${RAP_REPOSITORY}"
 
