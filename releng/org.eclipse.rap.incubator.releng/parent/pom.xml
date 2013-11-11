@@ -45,12 +45,12 @@
     <repository>
       <id>extra-dependencies-repository</id>
       <layout>p2</layout>
-      <url>http://build.eclipse.org/rt/rap/base-platforms/2.1/extra-dependencies</url>
+      <url>http://build.eclipse.org/rt/rap/base-platforms/2.2/extra-dependencies</url>
     </repository>
     <repository>
       <id>orbit-dependencies-repository</id>
       <layout>p2</layout>
-      <url>http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository</url>
+      <url>http://download.eclipse.org/tools/orbit/downloads/drops/R20130827064939/repository</url>
     </repository>
     <repository>
       <id>fileupload-dependencies-repository</id>
@@ -252,12 +252,6 @@
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <version>${junit-version}</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.mockito</groupId>
-      <artifactId>mockito-core</artifactId>
-      <version>${mockito-version}</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
