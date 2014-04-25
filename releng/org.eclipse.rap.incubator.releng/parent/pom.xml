@@ -89,11 +89,13 @@
             <artifactId>tycho-buildtimestamp-jgit</artifactId>
             <version>${tycho-extras-version}</version>
           </dependency>
+          <!-- 
           <dependency> 
             <groupId>org.eclipse.tycho.extras</groupId> 
             <artifactId>tycho-sourceref-jgit</artifactId> 
             <version>${tycho-extras-version}</version> 
           </dependency> 
+           -->
         </dependencies>
         <configuration>
           <timestampProvider>jgit</timestampProvider>
@@ -103,9 +105,11 @@
           </jgit.ignore>
  -->
           <format>yyyyMMdd-HHmm</format>
+<!-- need to be configured in projects first: tycho.scmUrl
           <sourceReferences> 
             <generate>true</generate> 
           </sourceReferences> 
+ -->
         </configuration>
       </plugin>
 
