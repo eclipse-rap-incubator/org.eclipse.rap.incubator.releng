@@ -79,7 +79,7 @@ git clone --branch=${GIT_BRANCH} ${REPOSITORY} ${REPOSITORY_NAME}
 BUILD_DIRECTORY=${WORKSPACE}/${REPOSITORY_NAME}/${BUILD_PROJECT_PATH}
 echo "Starting build in ${BUILD_DIRECTORY}"
 cd ${BUILD_DIRECTORY}
-${MVN} -e clean package $SIGNPROFILE -Dmaven.repo.local=${MAVEN_LOCAL_REPO_PATH} -Drap-repository=${RAP_REPOSITORY}
+${MVN} -e clean verify $SIGNPROFILE -Dmaven.repo.local=${MAVEN_LOCAL_REPO_PATH} -Drap-repository=${RAP_REPOSITORY}
 EXITCODE=$?
 if [ "$EXITCODE" != "0" ]; then
   echo "Maven exited with error code " + ${EXITCODE}
@@ -139,4 +139,3 @@ done
 # build done
 echo "Build ${TIMESTAMP} of ${COMPONENT_NAME} ${VERSION} done."
 echo "***********************************************************************"
-
