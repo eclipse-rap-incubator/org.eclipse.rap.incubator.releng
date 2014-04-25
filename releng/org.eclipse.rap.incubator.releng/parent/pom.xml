@@ -104,6 +104,9 @@
             pom.xml
           </jgit.ignore>
  -->
+          <jgit.dirtyWorkingTree>
+            ignore
+          </jgit.dirtyWorkingTree>
           <format>yyyyMMdd-HHmm</format>
 <!-- need to be configured in projects first: tycho.scmUrl
           <sourceReferences> 
