@@ -6,7 +6,7 @@ echo "***********************************************************************"
 export WORKSPACE=${WORKSPACE:-$PWD}
 echo "Workspace location: ${WORKSPACE}"
 
-export MVN=${MVN:-"/opt/public/common/apache-maven-3.0.5/bin/mvn"}
+export MVN=${MVN:-"/opt/public/common/apache-maven-3.2.1/bin/mvn"}
 echo "Maven path: ${MVN}"
 
 export ECLIPSE_HOME=${ECLIPSE_HOME:-"/shared/rt/rap/build-runtimes/eclipse"}
