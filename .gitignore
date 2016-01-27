@@ -1,4 +1,8 @@
 bin/
 target/
+<<<<<<< HEAD   (d8f76a Clean up obsolete build files)
 .DS_Store/
 *~
+=======
+node_modules/
+>>>>>>> BRANCH (89e5dd Import bundles from github)

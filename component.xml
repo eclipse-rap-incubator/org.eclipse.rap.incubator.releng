@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component>
+  <name>
+    Chart
+  </name>
+  <maintainer>
+    Ralf Sternberg
+  </maintainer>
+  <description>
+    <p>
+      An extensible chart widget based on d3.js.
+    </p>
+  </description>
+</component>
